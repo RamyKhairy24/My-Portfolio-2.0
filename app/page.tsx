@@ -66,7 +66,7 @@ const PROJECTS = [
     title: "My Portfolio 1.0",
     description: "First iteration of my personal portfolio — a clean, modern single-page website built to showcase my projects, skills, and experience as a backend developer.",
     tags: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-    link: "#",
+    link: "https://ramykhairy24.github.io/My-Portfolio/",
     github: "#",
     previewImage: "/pictures/Project%20Cards/My%20Portfolio%201.0.png"
   }
@@ -91,14 +91,14 @@ const CERTIFICATIONS = [
     title: "IELTS Academic (6.5)",
     issuer: "British Council",
     date: "2023",
-    link: "#",
+    link: "/IELTS%20Report.pdf",
     image: "/pictures/Certificates/IELTS%20Report.png"
   },
   {
     title: "CIB Internship Certificate",
     issuer: "Commercial International Bank",
     date: "2025",
-    link: "#",
+    link: "/Ramy%20Mahmoud%20-%20CIB%20Summer%20Internship%202025%20Certificate.pdf",
     image: "/pictures/Certificates/CIB%20Internship.png"
   },
   {
