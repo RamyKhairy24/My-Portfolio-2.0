@@ -17,6 +17,7 @@ import { Logo } from '@/components/Logo';
 import { useTheme } from '@/components/ThemeProvider';
 import { IntroAnimation } from '@/components/IntroAnimation';
 import { ContactForm } from '@/components/ContactForm';
+import { PortalReturn } from '@/components/PortalReturn';
 
 const SKILLS = {
   languages: ["C#", "C", "Java", "JavaScript", "Kotlin", "C++", "SQL", "Python"],
@@ -227,6 +228,7 @@ export default function Home() {
   return (
     <div className="min-h-dvh overflow-x-hidden selection:bg-brand-cream selection:text-brand-ink">
       <IntroAnimation />
+      <PortalReturn />
 
       {/* Scroll Progress Bar */}
       <motion.div

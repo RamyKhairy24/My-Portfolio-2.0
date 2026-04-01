@@ -44,6 +44,9 @@ export const ProjectCard = ({
   };
 
   const handleComplete = () => {
+    // Signal to the portfolio page that we navigated away via portal
+    // so it can play the reverse portal animation when the user comes back
+    sessionStorage.setItem('portal-return', '1');
     window.location.href = link;
     // intentionally NOT resetting isActivating — the overlay stays visible
     // as a loading screen until the browser navigates to the new page
@@ -175,6 +178,7 @@ export const CertificationCard = ({
   };
 
   const handleComplete = () => {
+    sessionStorage.setItem('portal-return', '1');
     window.location.href = link;
     // intentionally NOT resetting isActivating — overlay persists until navigation
   };
@@ -206,12 +210,17 @@ export const CertificationCard = ({
             className="w-full h-full object-cover transition-all duration-700 animate-slow-zoom"
           />
 
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/cert:opacity-100 transition-opacity duration-500 z-20">
+          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/cert:opacity-100 touch-visible-overlay transition-opacity duration-500 z-20">
             <Award className="text-brand-cream w-12 h-12" />
           </div>
 
           <div className="absolute bottom-0 left-0 w-full p-4 bg-brand-ink/90 backdrop-blur border-t border-brand-cream/10 translate-y-full group-hover/cert:translate-y-0 transition-transform duration-500 z-30">
             <span className="text-[10px] uppercase tracking-[0.2em] font-bold">Verify Credential</span>
+          </div>
+
+          {/* Touch-only persistent tap hint */}
+          <div className="touch-tap-hint absolute bottom-0 left-0 right-0 z-20 flex items-center justify-center gap-2 py-3 bg-gradient-to-t from-brand-ink/80 to-transparent pointer-events-none">
+            <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-brand-cream/70">Tap to verify</span>
           </div>
         </motion.div>
       </div>
