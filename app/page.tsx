@@ -55,9 +55,8 @@ const PROJECTS = [
     title: "Octopus System",
     description: "Customer service quality-assurance platform for agencies. Users screenshot emails or any document — Octopus OCR-scans the content, exports it as Excel, persists records to a SQL database, and provides a unified data hub with live preview and bulk export.",
     tags: ["C#", ".NET", "OCR", "Excel Export", "SQL Server", "WinForms"],
-    link: "#",
+    link: "https://octopus-self.vercel.app",
     github: "#",
-    previewImage: "/pictures/Project%20Cards/Octopus.png"
   },
   {
     title: "My Portfolio 1.0",
