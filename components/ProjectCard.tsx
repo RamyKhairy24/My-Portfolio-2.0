@@ -13,6 +13,7 @@ interface ProjectProps {
   github?: string;
   previewImage?: string;
   previewVideo?: string;
+  wip?: boolean;
 }
 
 export const ProjectCard = ({
@@ -23,6 +24,7 @@ export const ProjectCard = ({
   github,
   previewImage,
   previewVideo,
+  wip,
 }: ProjectProps) => {
   const [isActivating, setIsActivating] = useState(false);
   const [videoError, setVideoError] = useState(false);
@@ -46,6 +48,11 @@ export const ProjectCard = ({
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px w-8 bg-brand-cream/20" />
             <span className="text-[10px] uppercase tracking-[0.4em] text-brand-cream/40 font-bold">Project</span>
+            {wip && (
+              <span className="ml-1 px-2 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-[9px] uppercase tracking-[0.3em] font-bold text-amber-400">
+                In Production
+              </span>
+            )}
           </div>
           <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif italic mb-4 md:mb-6 tracking-tight leading-none">{title}</h3>
           <p className="text-brand-cream/60 max-w-2xl text-base md:text-lg leading-relaxed mb-6 md:mb-8">{description}</p>

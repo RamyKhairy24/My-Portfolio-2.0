@@ -33,6 +33,7 @@ const PROJECTS = [
     tags: ["NestJS", "TypeScript", "Prisma", "PostgreSQL", "Redis", "Docker"],
     link: "https://gameshubeg.vercel.app",
     github: "#",
+    wip: true,
     previewImage: "https://picsum.photos/seed/gameshub/1200/800",
     previewVideo: "/videos/gameshub-preview.mp4"
   },
