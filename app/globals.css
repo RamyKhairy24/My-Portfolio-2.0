@@ -96,6 +96,20 @@
   will-change: transform;
 }
 
+/* ── Touch-device portal hints ────────────────────────────── */
+/* On devices with a real pointer (desktop), hide the tap hint */
+@media (hover: hover) and (pointer: fine) {
+  .touch-tap-hint {
+    display: none;
+  }
+}
+/* On touch devices, always show the tap hint and hide hover overlay */
+@media (hover: none) {
+  .touch-visible-overlay {
+    display: none;
+  }
+}
+
 /* ── Safe-area-aware mobile header & main offset ──────────── */
 /* Outer header absorbs safe-area-inset-top so content clears the Dynamic Island */
 .mobile-safe-header {

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Github, Award } from 'lucide-react';
 import { PortalTransition } from './PortalTransition';
@@ -28,6 +28,16 @@ export const ProjectCard = ({
 }: ProjectProps) => {
   const [isActivating, setIsActivating] = useState(false);
   const [videoError, setVideoError] = useState(false);
+
+  // Fix: when user hits the browser back button the page is restored from
+  // BFCache with isActivating still true. Reset it so the overlay clears.
+  useEffect(() => {
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) setIsActivating(false);
+    };
+    window.addEventListener('pageshow', handlePageShow);
+    return () => window.removeEventListener('pageshow', handlePageShow);
+  }, []);
 
   const handlePortalClick = () => {
     setIsActivating(true);
@@ -113,11 +123,15 @@ export const ProjectCard = ({
               />
             )}
 
-            {/* Portal Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/portal:opacity-100 transition-opacity duration-500 z-20 bg-brand-ink/40 backdrop-blur-[2px]">
+            {/* Portal Overlay — visible on hover (desktop) or always on touch devices */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/portal:opacity-100 touch-visible-overlay transition-opacity duration-500 z-20 bg-brand-ink/40 backdrop-blur-[2px]">
               <div className="px-10 py-5 bg-brand-cream text-brand-ink text-[10px] uppercase tracking-[0.4em] font-bold shadow-2xl">
                 Explore Portal
               </div>
+            </div>
+            {/* Touch-only persistent tap hint at the bottom of the card */}
+            <div className="touch-tap-hint absolute bottom-0 left-0 right-0 z-20 flex items-center justify-center gap-2 py-3 bg-gradient-to-t from-brand-ink/80 to-transparent pointer-events-none">
+              <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-brand-cream/70">Tap to explore</span>
             </div>
 
             {/* Links Overlay */}
