@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 
 // ✏️  Sign up at formspree.io → create a form → paste your form ID below.
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xykbpdlp';
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
 
