@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import {
   Github,
   Linkedin,
+  Mail,
   ChevronRight,
   Menu,
   X,
@@ -73,14 +74,14 @@ const CERTIFICATIONS = [
     title: "Generative AI: Prompt Engineering",
     issuer: "IBM via Coursera",
     date: "2024",
-    link: "https://coursera.org/verify/...",
+    link: "https://coursera.org/verify/U0JQEFH6NNTX",
     image: "/pictures/Certificates/Introduction%20To%20Prompt%20Engineering.png"
   },
   {
     title: "Back-End Development",
     issuer: "Meta via Coursera",
     date: "2024",
-    link: "https://coursera.org/verify/...",
+    link: "https://coursera.org/verify/69QQUFZCBPPZ",
     image: "/pictures/Certificates/Introduction%20To%20Backend%20Development.png"
   },
   {
@@ -101,63 +102,63 @@ const CERTIFICATIONS = [
     title: "Google AI Professional Certificate",
     issuer: "Google",
     date: "2024",
-    link: "#",
+    link: "https://coursera.org/verify/professional-cert/KXOQHK3IQZ73",
     image: "/pictures/Certificates/Google%20Ai%20Professional%20Certificate.png"
   },
   {
     title: "AI Fundamentals",
     issuer: "Google via Coursera",
     date: "2024",
-    link: "#",
+    link: "https://coursera.org/verify/3GOF13FX96AM",
     image: "/pictures/Certificates/Ai%20Fundemntals.png"
   },
   {
     title: "AI for Brainstorming & Planning",
     issuer: "Google via Coursera",
     date: "2024",
-    link: "#",
+    link: "https://coursera.org/verify/NYYOYW7CQCIS",
     image: "/pictures/Certificates/Ai%20For%20BrainStorming%20And%20Planning.png"
   },
   {
     title: "AI for Content Creation",
     issuer: "Google via Coursera",
     date: "2024",
-    link: "#",
+    link: "https://coursera.org/verify/3PCBBA4G4X3E",
     image: "/pictures/Certificates/Ai%20For%20Content%20Creation.png"
   },
   {
     title: "AI for Data Analysis",
     issuer: "Google via Coursera",
     date: "2024",
-    link: "#",
+    link: "https://coursera.org/verify/PREDOYDTG6PN",
     image: "/pictures/Certificates/Ai%20For%20Data%20Analysis.png"
   },
   {
     title: "AI for In-App Building",
     issuer: "Google via Coursera",
     date: "2024",
-    link: "#",
+    link: "https://coursera.org/verify/H2W8UECNX8CO",
     image: "/pictures/Certificates/Ai%20For%20In%20App%20Building.png"
   },
   {
     title: "AI for Research & Insights",
     issuer: "Google via Coursera",
     date: "2024",
-    link: "#",
+    link: "https://coursera.org/verify/G8NJ25EQ5478",
     image: "/pictures/Certificates/Ai%20For%20Research%20And%20Insights.png"
   },
   {
     title: "AI for Writing & Communication",
     issuer: "Google via Coursera",
     date: "2024",
-    link: "#",
+    link: "https://coursera.org/verify/DY1E6OSE8UZX",
     image: "/pictures/Certificates/Ai%20For%20Writing%20And%20Communication.png"
   },
   {
     title: "Programming in Python",
     issuer: "IBM via Coursera",
     date: "2024",
-    link: "#",
+    link: "https://coursera.org/verify/LWT0B0SEP33P",
     image: "/pictures/Certificates/Programming%20In%20Python.png"
   }
 ];
@@ -590,15 +591,48 @@ export default function Home() {
                 <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-serif italic mb-6 md:mb-8 leading-none">
                   Let&apos;s build <br /> something <br /> scalable.
                 </h2>
-                <div className="flex flex-col gap-1 mb-10 md:mb-12">
+                <a
+                  href="mailto:ramykhairybuisness@gmail.com"
+                  className="text-base sm:text-lg font-mono text-brand-cream hover:text-brand-cream/70 transition-colors block mb-6 underline underline-offset-4 break-all"
+                >
+                  ramykhairybuisness@gmail.com
+                </a>
+                <div className="flex flex-wrap gap-3 mb-10 md:mb-12">
                   <a
                     href="mailto:ramykhairybuisness@gmail.com"
-                    className="text-sm font-serif text-brand-cream/50 hover:text-brand-cream transition-colors break-all"
+                    aria-label="Email"
+                    className="w-11 h-11 rounded-full border border-brand-cream/30 flex items-center justify-center hover:bg-brand-cream hover:text-brand-ink transition-colors"
                   >
-                    ramykhairybuisness@gmail.com
+                    <Mail size={18} />
                   </a>
-                  <a href="tel:+201515817530" className="text-sm font-serif text-brand-cream/30">
-                    +20 1515817530
+                  <a
+                    href="https://github.com/RamyKhairy24"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    className="w-11 h-11 rounded-full border border-brand-cream/30 flex items-center justify-center hover:bg-brand-cream hover:text-brand-ink transition-colors"
+                  >
+                    <Github size={18} />
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/ramykhairy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="w-11 h-11 rounded-full border border-brand-cream/30 flex items-center justify-center hover:bg-brand-cream hover:text-brand-ink transition-colors"
+                  >
+                    <Linkedin size={18} />
+                  </a>
+                  <a
+                    href="https://wa.me/201515817530"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp"
+                    className="w-11 h-11 rounded-full border border-brand-cream/30 flex items-center justify-center hover:bg-[#25D366] hover:border-[#25D366] transition-colors"
+                  >
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-[18px] h-[18px]">
+                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                    </svg>
                   </a>
                 </div>
                 <ContactForm />
@@ -629,6 +663,24 @@ export default function Home() {
             </div>
           </div>
         </footer>
+
+        {/* Floating WhatsApp Button */}
+        <motion.a
+          href="https://wa.me/201515817530"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Chat on WhatsApp"
+          className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:shadow-xl"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 1.5, type: 'spring', stiffness: 260, damping: 20 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <svg viewBox="0 0 24 24" fill="white" className="w-7 h-7">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+          </svg>
+        </motion.a>
 
       </main>
     </div>
