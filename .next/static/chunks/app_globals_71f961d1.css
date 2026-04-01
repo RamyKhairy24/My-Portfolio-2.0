@@ -147,6 +147,7 @@
     --color-yellow-500: #edb200;
     --color-green-500: #00c758;
     --color-emerald-400: #00d294;
+    --color-black: #000;
     --color-white: #fff;
     --spacing: .25rem;
     --container-2xl: 42rem;
@@ -2158,6 +2159,12 @@
   }
 
   @media (hover: hover) {
+    .group-hover\:text-brand-ink:is(:where(.group):hover *) {
+      color: var(--color-brand-ink);
+    }
+  }
+
+  @media (hover: hover) {
     .group-hover\/cert\:translate-y-0:is(:where(.group\/cert):hover *) {
       --tw-translate-y: calc(var(--spacing) * 0);
       translate: var(--tw-translate-x) var(--tw-translate-y);
@@ -2233,8 +2240,26 @@
   }
 
   @media (hover: hover) {
+    .hover\:border-\[\#0A66C2\]:hover {
+      border-color: #0a66c2;
+    }
+  }
+
+  @media (hover: hover) {
     .hover\:border-\[\#25D366\]:hover {
       border-color: #25d366;
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:border-white:hover {
+      border-color: var(--color-white);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:bg-\[\#0A66C2\]:hover {
+      background-color: #0a66c2;
     }
   }
 
@@ -2275,6 +2300,18 @@
   }
 
   @media (hover: hover) {
+    .hover\:bg-white:hover {
+      background-color: var(--color-white);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:text-black:hover {
+      color: var(--color-black);
+    }
+  }
+
+  @media (hover: hover) {
     .hover\:text-brand-cream:hover {
       color: var(--color-brand-cream);
     }
@@ -2295,6 +2332,12 @@
   @media (hover: hover) {
     .hover\:text-brand-ink:hover {
       color: var(--color-brand-ink);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:text-white:hover {
+      color: var(--color-white);
     }
   }
 

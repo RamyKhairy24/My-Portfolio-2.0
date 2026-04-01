@@ -23,8 +23,10 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* offset anchors so fixed top bar on mobile doesn't cover content */
-    scroll-padding-top: 3.5rem;
+    /* offset anchors so fixed top bar (+ Dynamic Island) doesn't cover content */
+    scroll-padding-top: calc(3.5rem + env(safe-area-inset-top, 0px));
+    /* prevent any element from causing horizontal scroll */
+    overflow-x: hidden;
   }
 
   @media (min-width: 1024px) {
@@ -35,8 +37,9 @@
 
   body {
     @apply bg-brand-ink text-brand-cream font-sans antialiased;
-    /* safe area for iOS notch / home indicator */
+    /* safe area for iOS notch / Dynamic Island / home indicator */
     padding-bottom: env(safe-area-inset-bottom);
+    overflow-x: hidden;
   }
   
   h1, h2, h3, h4, .serif {
@@ -73,12 +76,14 @@
   background: rgba(245, 242, 237, 0.03);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(245, 242, 237, 0.05);
+  will-change: transform;
 }
 
 .glass-card-dark {
   background: rgba(10, 10, 10, 0.03);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(10, 10, 10, 0.05);
+  will-change: transform;
 }
 
 @keyframes slow-zoom {
@@ -88,4 +93,25 @@
 
 .animate-slow-zoom {
   animation: slow-zoom 20s infinite alternate ease-in-out;
+  will-change: transform;
+}
+
+/* ── Safe-area-aware mobile header & main offset ──────────── */
+/* Outer header absorbs safe-area-inset-top so content clears the Dynamic Island */
+.mobile-safe-header {
+  padding-top: env(safe-area-inset-top, 0px);
+  /* Promote to GPU layer so the fixed header never triggers a page repaint */
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+/* Main content pushed down by header height + safe-area top */
+.main-top-offset {
+  padding-top: calc(3.5rem + env(safe-area-inset-top, 0px));
+}
+
+@media (min-width: 1024px) {
+  .main-top-offset {
+    padding-top: 0;
+  }
 }

@@ -32,7 +32,7 @@ export const ProjectCard = ({
   };
 
   const handleComplete = () => {
-    window.open(link, '_blank');
+    window.location.href = link;
     setIsActivating(false);
   };
 
@@ -153,7 +153,7 @@ export const CertificationCard = ({
   };
 
   const handleComplete = () => {
-    window.open(link, '_blank');
+    window.location.href = link;
     setIsActivating(false);
   };
 

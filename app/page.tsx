@@ -10,6 +10,7 @@ import {
   X,
   Sun,
   Moon,
+  Mail,
 } from 'lucide-react';
 import { ProjectCard, CertificationCard } from '@/components/ProjectCard';
 import { Logo } from '@/components/Logo';
@@ -188,10 +189,10 @@ const NAV_LINKS = [
 function ScrollReveal({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8, delay }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.5, delay, ease: 'easeOut' }}
     >
       {children}
     </motion.div>
@@ -203,8 +204,9 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('about');
   const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
-  const scale  = useTransform(scrollYProgress, [0, 0.05], [1, 0.95]);
+  const opacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
+  // Remove scale — animating scale on a full-screen section is expensive
+  const scale  = useTransform(scrollYProgress, [0, 0.12], [1, 1]);
 
   useEffect(() => {
     const ids = NAV_LINKS.map(l => l.href.slice(1));
@@ -222,7 +224,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-dvh selection:bg-brand-cream selection:text-brand-ink">
+    <div className="min-h-dvh overflow-x-hidden selection:bg-brand-cream selection:text-brand-ink">
       <IntroAnimation />
 
       {/* Scroll Progress Bar */}
@@ -274,42 +276,45 @@ export default function Home() {
       </nav>
 
       {/* ── Mobile / Tablet Top Bar (< lg) ────────────────────────── */}
-      <header className="fixed top-0 left-0 right-0 h-14 flex items-center justify-between px-5 z-50 bg-brand-ink/95 backdrop-blur-sm border-b border-brand-cream/5 lg:hidden">
-        <Logo className="w-8 h-8 text-brand-cream" />
+      {/* Outer header absorbs safe-area-inset-top to clear Dynamic Island / notch */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-brand-ink/95 backdrop-blur-sm border-b border-brand-cream/5 lg:hidden mobile-safe-header">
+        <div className="h-14 flex items-center justify-between px-5">
+          <Logo className="w-8 h-8 text-brand-cream" />
 
-        {/* Tablet: inline horizontal links */}
-        <nav className="hidden sm:flex items-center gap-5 md:gap-7">
-          {NAV_LINKS.map(({ href, label }) => {
-            const isActive = activeSection === href.slice(1);
-            return (
-              <a key={href} href={href} className={`relative text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 pb-0.5 ${
-                isActive ? 'text-brand-cream' : 'text-brand-cream/40 hover:text-brand-cream/70'
-              }`}>
-                {label}
-                {isActive && (
-                  <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-brand-cream/60" />
-                )}
-              </a>
-            );
-          })}
-        </nav>
+          {/* Tablet: inline horizontal links */}
+          <nav className="hidden sm:flex items-center gap-5 md:gap-7">
+            {NAV_LINKS.map(({ href, label }) => {
+              const isActive = activeSection === href.slice(1);
+              return (
+                <a key={href} href={href} className={`relative text-[10px] uppercase tracking-[0.3em] font-bold transition-all duration-300 pb-0.5 ${
+                  isActive ? 'text-brand-cream' : 'text-brand-cream/40 hover:text-brand-cream/70'
+                }`}>
+                  {label}
+                  {isActive && (
+                    <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-brand-cream/60" />
+                  )}
+                </a>
+              );
+            })}
+          </nav>
 
-        {/* Mobile: hamburger + theme toggle */}
-        <div className="flex items-center gap-1">
-          <button
-            onClick={toggle}
-            aria-label="Toggle color theme"
-            className="text-brand-cream/50 hover:text-brand-cream transition-colors p-1.5"
-          >
-            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-          </button>
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="sm:hidden text-brand-cream p-1"
-            aria-label="Toggle menu"
-          >
-            {menuOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
+          {/* Mobile: hamburger + theme toggle */}
+          <div className="flex items-center gap-1">
+            <button
+              onClick={toggle}
+              aria-label="Toggle color theme"
+              className="text-brand-cream/50 hover:text-brand-cream transition-colors p-1.5"
+            >
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+            </button>
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="sm:hidden text-brand-cream p-1"
+              aria-label="Toggle menu"
+            >
+              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -346,8 +351,8 @@ export default function Home() {
       </AnimatePresence>
 
       {/* ── Main Content ──────────────────────────────────────────── */}
-      {/* pt-14 offsets the fixed top bar on mobile/tablet; lg removes it */}
-      <main className="lg:pl-20 pt-14 lg:pt-0">
+      {/* main-top-offset = 3.5rem header + safe-area-inset-top on mobile; 0 on desktop */}
+      <main className="lg:pl-20 main-top-offset">
 
         {/* Hero */}
         <section id="about" className="min-h-dvh flex flex-col justify-center px-5 sm:px-8 md:px-12 lg:px-32 relative overflow-hidden bg-brand-cream text-brand-ink">
@@ -393,7 +398,7 @@ export default function Home() {
                 </p>
                 <div className="flex flex-wrap gap-4 md:gap-6">
                   <a
-                    href="mailto:ramykhairybuisness@gmail.com"
+                    href="#contact"
                     className="group relative px-7 py-4 md:px-10 md:py-5 bg-brand-ink text-brand-cream text-[10px] md:text-xs uppercase tracking-[0.3em] font-bold overflow-hidden"
                   >
                     <span className="relative z-10">Get in touch</span>
@@ -591,13 +596,14 @@ export default function Home() {
                 <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-serif italic mb-6 md:mb-8 leading-none">
                   Let&apos;s build <br /> something <br /> scalable.
                 </h2>
-                <a
-                  href="mailto:ramykhairybuisness@gmail.com"
-                  className="text-base sm:text-lg font-mono text-brand-cream hover:text-brand-cream/70 transition-colors block mb-6 underline underline-offset-4 break-all"
-                >
-                  ramykhairybuisness@gmail.com
-                </a>
                 <div className="flex flex-wrap gap-3 mb-10 md:mb-12">
+                  <a
+                    href="mailto:ramykhairybuisness@gmail.com"
+                    aria-label="Email"
+                    className="w-11 h-11 rounded-full border border-brand-cream/30 flex items-center justify-center hover:bg-brand-cream hover:border-brand-cream hover:text-brand-ink transition-colors"
+                  >
+                    <Mail size={18} />
+                  </a>
                   <a
                     href="https://github.com/RamyKhairy24"
                     target="_blank"
