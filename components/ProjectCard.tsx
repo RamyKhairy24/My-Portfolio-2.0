@@ -162,9 +162,10 @@ export const CertificationCard = ({
       <PortalTransition isActivating={isActivating} onComplete={handleComplete} />
 
       <div className="group flex flex-col">
-        <div className="mb-4">
-          <h4 className="text-xl md:text-2xl font-serif italic mb-1">{title}</h4>
-          <p className="text-xs uppercase tracking-widest text-brand-cream/50">
+        {/* Fixed-height header so all images line up regardless of title length */}
+        <div className="mb-4 h-20 flex flex-col justify-end">
+          <h4 className="text-xl md:text-2xl font-serif italic mb-1 line-clamp-2 leading-snug">{title}</h4>
+          <p className="text-xs uppercase tracking-widest text-brand-cream/50 truncate">
             {issuer} — {date}
           </p>
         </div>
