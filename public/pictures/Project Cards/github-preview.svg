@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <defs>
+    <radialGradient id="bg-glow" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#1c2128"/>
+      <stop offset="100%" stop-color="#0d1117"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#21262d" stroke-width="1"/>
+    </pattern>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Base background -->
+  <rect width="1200" height="800" fill="#0d1117"/>
+  <!-- Grid overlay -->
+  <rect width="1200" height="800" fill="url(#grid)" opacity="0.6"/>
+  <!-- Radial glow -->
+  <rect width="1200" height="800" fill="url(#bg-glow)" opacity="0.8"/>
+
+  <!-- Ambient light blobs -->
+  <ellipse cx="600" cy="380" rx="320" ry="240" fill="rgba(56,139,253,0.04)"/>
+  <ellipse cx="200" cy="150" rx="180" ry="130" fill="rgba(188,140,255,0.03)"/>
+  <ellipse cx="1050" cy="650" rx="200" ry="150" fill="rgba(56,139,253,0.03)"/>
+
+  <!-- Decorative bracket lines top-left -->
+  <path d="M 80 60 L 60 60 L 60 120" fill="none" stroke="rgba(56,139,253,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Decorative bracket lines bottom-right -->
+  <path d="M 1120 740 L 1140 740 L 1140 680" fill="none" stroke="rgba(56,139,253,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Faint code lines -->
+  <text x="80" y="165" font-family="'Courier New', Courier, monospace" font-size="13" fill="rgba(139,148,158,0.18)" letter-spacing="0">public class Repository&lt;T&gt; where T : BaseEntity {</text>
+  <text x="80" y="188" font-family="'Courier New', Courier, monospace" font-size="13" fill="rgba(139,148,158,0.12)" letter-spacing="0">    private readonly DbContext _context;</text>
+  <text x="80" y="211" font-family="'Courier New', Courier, monospace" font-size="13" fill="rgba(139,148,158,0.09)" letter-spacing="0">    public async Task&lt;T&gt; GetByIdAsync(int id) =&gt; ...</text>
+
+  <text x="980" y="580" font-family="'Courier New', Courier, monospace" font-size="12" fill="rgba(139,148,158,0.12)" text-anchor="end">await Task.WhenAll(tasks);</text>
+  <text x="980" y="600" font-family="'Courier New', Courier, monospace" font-size="12" fill="rgba(139,148,158,0.08)" text-anchor="end">return results.OrderBy(r =&gt; r.Id);</text>
+  <text x="980" y="620" font-family="'Courier New', Courier, monospace" font-size="12" fill="rgba(139,148,158,0.06)" text-anchor="end">}</text>
+
+  <!-- GitHub Mark — centered, glowing -->
+  <g transform="translate(550, 295) scale(5)" filter="url(#glow)">
+    <path fill="rgba(255,255,255,0.82)" fill-rule="evenodd" clip-rule="evenodd"
+      d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+  </g>
+
+  <!-- Subtle ring around logo -->
+  <circle cx="600" cy="355" r="85" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <circle cx="600" cy="355" r="95" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+
+  <!-- Bottom separator line -->
+  <line x1="480" y1="540" x2="720" y2="540" stroke="rgba(48,54,61,1)" stroke-width="1"/>
+
+  <!-- "View Source" text -->
+  <text x="600" y="575" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="12" fill="rgba(139,148,158,0.45)" letter-spacing="5">VIEW SOURCE</text>
+
+  <!-- Bottom-left git badge -->
+  <rect x="60" y="720" width="90" height="26" rx="4" fill="rgba(21,26,35,1)" stroke="rgba(48,54,61,1)" stroke-width="1"/>
+  <text x="105" y="737" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="11" fill="rgba(139,148,158,0.5)">main</text>
+
+  <!-- Bottom-right lang badge -->
+  <rect x="1050" y="720" width="90" height="26" rx="4" fill="rgba(21,26,35,1)" stroke="rgba(48,54,61,1)" stroke-width="1"/>
+  <circle cx="1068" cy="733" r="5" fill="rgba(0,112,243,0.7)"/>
+  <text x="1100" y="737" text-anchor="middle" font-family="'Courier New', Courier, monospace" font-size="11" fill="rgba(139,148,158,0.5)">C#</text>
+</svg>

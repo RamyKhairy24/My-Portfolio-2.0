@@ -1,20 +1,38 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Ramy Khairy — Portfolio 2.0
 
-# Run and deploy your AI Studio app
+Personal portfolio website built with React 19, TypeScript, Vite, Tailwind CSS 4, and Motion.
 
-This contains everything you need to run your app locally.
+## Tech Stack
 
-View your app in AI Studio: https://ai.studio/apps/1394aaec-60df-48b2-b18c-6d936243b433
+- **React 19** + **TypeScript**
+- **Vite 6** — build tool & dev server
+- **Tailwind CSS 4** — utility-first styling
+- **Motion (Motion One)** — scroll-driven animations
+- **Lucide React** — icons
 
-## Run Locally
+## Getting Started
 
-**Prerequisites:**  Node.js
+**Prerequisites:** Node.js 18+
 
+```bash
+# Install dependencies
+npm install
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+# Start development server (http://localhost:3000)
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+## Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start dev server on port 3000 |
+| `npm run build` | Build for production |
+| `npm run preview` | Preview production build |
+| `npm run lint` | TypeScript type check |
