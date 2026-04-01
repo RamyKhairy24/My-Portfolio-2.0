@@ -30,36 +30,52 @@ export function PortalReturn() {
   const [streaks, setStreaks] = useState<Streak[]>([]);
 
   useEffect(() => {
-    if (!sessionStorage.getItem('portal-return')) return;
-    sessionStorage.removeItem('portal-return');
+    let timer: ReturnType<typeof setTimeout>;
 
-    // Warp streaks — shoot outward (you're arriving)
-    setStreaks(
-      Array.from({ length: 52 }).map((_, i) => ({
-        id: i,
-        angle: (360 / 52) * i + (Math.random() - 0.5) * 4,
-        len: Math.random() * 110 + 60,
-        delay: 0.05 + Math.random() * 0.2,
-      }))
-    );
+    const play = () => {
+      if (!sessionStorage.getItem('portal-return')) return;
+      sessionStorage.removeItem('portal-return');
 
-    // Emerge dots — burst from center to edges
-    setDots(
-      Array.from({ length: 60 }).map((_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 3 + 1,
-        delay: 0.3 + Math.random() * 0.35,
-        dur: Math.random() * 0.35 + 0.3,
-      }))
-    );
+      // Warp streaks — shoot outward (you're arriving)
+      setStreaks(
+        Array.from({ length: 52 }).map((_, i) => ({
+          id: i,
+          angle: (360 / 52) * i + (Math.random() - 0.5) * 4,
+          len: Math.random() * 110 + 60,
+          delay: 0.05 + Math.random() * 0.2,
+        }))
+      );
 
-    setActive(true);
+      // Emerge dots — burst from center to edges
+      setDots(
+        Array.from({ length: 60 }).map((_, i) => ({
+          id: i,
+          x: Math.random() * 100,
+          y: Math.random() * 100,
+          size: Math.random() * 3 + 1,
+          delay: 0.3 + Math.random() * 0.35,
+          dur: Math.random() * 0.35 + 0.3,
+        }))
+      );
 
-    // Hide the overlay after the animation completes
-    const t = setTimeout(() => setActive(false), 1400);
-    return () => clearTimeout(t);
+      setActive(true);
+      timer = setTimeout(() => setActive(false), 1400);
+    };
+
+    // Normal mount (hard-reload / first visit after portal)
+    play();
+
+    // BFCache restore — page is pulled from cache on back button press
+    // useEffect does NOT re-run in this case, so we need pageshow
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) play();
+    };
+    window.addEventListener('pageshow', handlePageShow);
+
+    return () => {
+      window.removeEventListener('pageshow', handlePageShow);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (

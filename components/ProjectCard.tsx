@@ -40,6 +40,8 @@ export const ProjectCard = ({
   }, []);
 
   const handlePortalClick = () => {
+    // Don't activate for dead / placeholder links
+    if (!link || link === '#') return;
     setIsActivating(true);
   };
 
@@ -174,6 +176,8 @@ export const CertificationCard = ({
   const [isActivating, setIsActivating] = useState(false);
 
   const handlePortalClick = () => {
+    // Don't activate for dead / placeholder links
+    if (!link || link === '#') return;
     setIsActivating(true);
   };
 
