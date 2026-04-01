@@ -5,30 +5,31 @@ import { motion, AnimatePresence } from 'motion/react';
 
 const C = 'rgba(245,242,237,';
 
+interface Dot {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  delay: number;
+  dur: number;
+}
+
 interface Streak {
   id: number;
   angle: number;
   len: number;
   width: number;
   delay: number;
-  dur: number;
-}
-
-interface Ring {
-  id: number;
-  size: number;
-  delay: number;
 }
 
 /**
  * Plays a brief "emerge from portal" animation whenever the user navigates
  * back to the portfolio after having left via a portal link.
- * Reads & clears a sessionStorage flag set by PortalTransition.
  */
 export function PortalReturn() {
-  const [active, setActive]       = useState(false);
-  const [streaks, setStreaks]     = useState<Streak[]>([]);
-  const [rings, setRings]         = useState<Ring[]>([]);
+  const [active, setActive]   = useState(false);
+  const [dots, setDots]       = useState<Dot[]>([]);
+  const [streaks, setStreaks] = useState<Streak[]>([]);
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;
@@ -37,34 +38,35 @@ export function PortalReturn() {
       if (!sessionStorage.getItem('portal-return')) return;
       sessionStorage.removeItem('portal-return');
 
-      // 52 radial speed streaks — shorter/faster than departure (decelerating)
-      setStreaks(
-        Array.from({ length: 52 }).map((_, i) => ({
+      // Stars burst outward from center — you're being ejected from the portal
+      setDots(
+        Array.from({ length: 55 }).map((_, i) => ({
           id: i,
-          angle: (360 / 52) * i + (Math.random() - 0.5) * 4,
-          len:   Math.random() * 130 + 50,
-          width: Math.random() * 1.5  + 0.5,
-          delay: 0.05 + Math.random() * 0.25,
-          dur:   0.4  + Math.random() * 0.3,
+          x:     Math.random() * 100,
+          y:     Math.random() * 100,
+          size:  Math.random() * 3 + 1,
+          delay: 0.28 + Math.random() * 0.3,
+          dur:   0.28 + Math.random() * 0.2,
         }))
       );
 
-      // 3 portal rings dispersing on arrival
-      setRings([
-        { id: 0, size: 80,  delay: 0.0  },
-        { id: 1, size: 180, delay: 0.08 },
-        { id: 2, size: 300, delay: 0.16 },
-      ]);
+      // Residual warp streaks — fading as you decelerate
+      setStreaks(
+        Array.from({ length: 48 }).map((_, i) => ({
+          id: i,
+          angle: (360 / 48) * i + (Math.random() - 0.5) * 3,
+          len:   Math.random() * 120 + 40,
+          width: Math.random() * 1.5 + 0.5,
+          delay: 0.04 + Math.random() * 0.2,
+        }))
+      );
 
       setActive(true);
-      timer = setTimeout(() => setActive(false), 1500);
+      timer = setTimeout(() => setActive(false), 1300);
     };
 
-    // Normal mount (hard-load / first visit after portal)
     play();
 
-    // BFCache restore — browser Back button pulls page from cache without
-    // remounting React, so useEffect never re-runs; pageshow handles it
     const handlePageShow = (e: PageTransitionEvent) => {
       if (e.persisted) play();
     };
@@ -79,46 +81,45 @@ export function PortalReturn() {
   return (
     <AnimatePresence>
       {active && (
-        // Transparent container so we control exactly what the user sees
         <motion.div
           className="starfield"
           style={{ background: 'transparent' }}
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.45, ease: 'easeInOut' } }}
+          exit={{ opacity: 0, transition: { duration: 0.4, ease: 'easeInOut' } }}
         >
-          {/* Black base — fades away to reveal the portfolio underneath */}
+          {/* Black base fades out, revealing the portfolio */}
           <motion.div
             initial={{ opacity: 1 }}
             animate={{ opacity: 0 }}
-            transition={{ duration: 0.65, delay: 0.55, ease: 'easeInOut' }}
+            transition={{ duration: 0.55, delay: 0.5, ease: 'easeInOut' }}
             style={{ position: 'absolute', inset: 0, background: '#0a0a0a' }}
           />
 
-          {/* Arrival flash — brief burst of light as you emerge */}
+          {/* Arrival flash — you burst through */}
           <motion.div
-            initial={{ opacity: 0.72 }}
+            initial={{ opacity: 0.78 }}
             animate={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.4, 0, 1, 1] }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 1, 1] }}
             style={{ position: 'absolute', inset: 0, background: '#f5f2ed' }}
           />
 
-          {/* Central arrival glow — collapses as the portal closes */}
+          {/* Portal ring — collapses as the portal closes behind you */}
           <motion.div
-            initial={{ scale: 1.6, opacity: 0.55 }}
-            animate={{ scale: 0.15, opacity: 0 }}
-            transition={{ duration: 0.72, delay: 0.04, ease: [0.5, 0, 0.85, 1] }}
+            initial={{ scale: 1.6, opacity: 0.85 }}
+            animate={{ scale: 0.1, opacity: 0 }}
+            transition={{ duration: 0.65, delay: 0.04, ease: [0.5, 0, 0.9, 1] }}
             style={{
               position: 'absolute',
               left: '50%', top: '50%',
-              width: 160, height: 160,
-              marginLeft: -80, marginTop: -80,
+              width: 90, height: 90,
+              marginLeft: -45, marginTop: -45,
               borderRadius: '50%',
-              background: `radial-gradient(circle, ${C}0.6) 0%, ${C}0.1) 55%, transparent 75%)`,
-              filter: 'blur(10px)',
+              border: `2px solid ${C}0.9)`,
+              boxShadow: `0 0 30px ${C}0.45), inset 0 0 22px ${C}0.2)`,
             }}
           />
 
-          {/* Speed streaks — residual warp field dispersing */}
+          {/* Residual streaks dispersing outward */}
           {streaks.map((s) => (
             <motion.div
               key={s.id}
@@ -127,44 +128,34 @@ export function PortalReturn() {
                 left: '50%', top: '50%',
                 width: s.len, height: s.width,
                 marginTop: -s.width / 2,
-                background: `linear-gradient(to right, transparent, ${C}0.7) 18%, ${C}0.95) 50%, ${C}0.7) 82%, transparent)`,
+                background: `linear-gradient(to right, transparent, ${C}0.65) 20%, ${C}0.9) 50%, ${C}0.65) 80%, transparent)`,
                 transformOrigin: 'left center',
               }}
               initial={{ rotate: s.angle, scaleX: 0, opacity: 0 }}
               animate={{ scaleX: [0, 1, 0], opacity: [0, 0.85, 0] }}
               transition={{
-                duration: s.dur,
+                duration: 0.55,
                 delay: s.delay,
                 ease: [0.1, 0, 0.9, 1],
-                times: [0, 0.42, 1],
+                times: [0, 0.4, 1],
               }}
             />
           ))}
 
-          {/* Portal rings — expand outward as the portal dissipates */}
-          {rings.map((r) => (
+          {/* Stars scatter outward from center */}
+          {dots.map((d) => (
             <motion.div
-              key={r.id}
-              initial={{ scale: 0.15, opacity: 0 }}
-              animate={{ scale: [0.15, 1.5, 2.8], opacity: [0.82, 0.55, 0] }}
-              transition={{
-                duration: 0.9,
-                delay: r.delay,
-                ease: [0.2, 0, 0.9, 1],
-                times: [0, 0.32, 1],
+              key={d.id}
+              className="star"
+              style={{ width: d.size, height: d.size }}
+              initial={{ left: '50%', top: '50%', opacity: 0, scale: 0 }}
+              animate={{
+                left:    `${d.x}%`,
+                top:     `${d.y}%`,
+                opacity: [0, 0.9, 0],
+                scale:   [0, 1.6, 0],
               }}
-              style={{
-                position: 'absolute',
-                left: '50%', top: '50%',
-                width: r.size, height: r.size,
-                marginLeft: -r.size / 2, marginTop: -r.size / 2,
-                borderRadius: '50%',
-                border: `${r.id === 0 ? 2 : 1}px solid ${C}${(0.85 - r.id * 0.2).toFixed(2)})`,
-                boxShadow:
-                  r.id === 0
-                    ? `0 0 24px ${C}0.45), inset 0 0 18px ${C}0.18)`
-                    : undefined,
-              }}
+              transition={{ duration: d.dur, delay: d.delay, ease: [0, 0.55, 1, 1] }}
             />
           ))}
         </motion.div>
@@ -172,3 +163,4 @@ export function PortalReturn() {
     </AnimatePresence>
   );
 }
+
