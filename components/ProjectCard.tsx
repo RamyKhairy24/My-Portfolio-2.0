@@ -33,7 +33,8 @@ export const ProjectCard = ({
 
   const handleComplete = () => {
     window.location.href = link;
-    setIsActivating(false);
+    // intentionally NOT resetting isActivating — the overlay stays visible
+    // as a loading screen until the browser navigates to the new page
   };
 
   return (
@@ -154,7 +155,7 @@ export const CertificationCard = ({
 
   const handleComplete = () => {
     window.location.href = link;
-    setIsActivating(false);
+    // intentionally NOT resetting isActivating — overlay persists until navigation
   };
 
   return (

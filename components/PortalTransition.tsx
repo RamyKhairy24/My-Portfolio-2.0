@@ -78,7 +78,7 @@ export const PortalTransition = ({
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 20, opacity: 1 }}
             transition={{ duration: 1.5, ease: 'easeIn' }}
-            className="absolute inset-0 bg-brand-cream rounded-full m-auto w-10 h-10"
+            className="absolute inset-0 bg-brand-ink rounded-full m-auto w-10 h-10"
           />
         </motion.div>
       )}

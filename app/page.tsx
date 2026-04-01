@@ -570,17 +570,49 @@ export default function Home() {
               </ScrollReveal>
               <div className="space-y-6 md:space-y-8 lg:space-y-12">
                 <ScrollReveal delay={0.1}>
-                  <div className="p-6 sm:p-8 lg:p-12 border border-brand-cream/5 bg-brand-cream/5 backdrop-blur-sm group hover:bg-brand-cream/10 transition-colors duration-500">
-                    <span className="text-[10px] uppercase tracking-widest text-brand-cream/40 mb-3 md:mb-4 block">2023 – Expected 2027</span>
-                    <h4 className="text-2xl md:text-3xl font-serif mb-2">Bachelor of Computer Science</h4>
-                    <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-brand-cream/60">Arab Academy for Science & Technology</p>
+                  <div className="border border-brand-cream/5 bg-brand-cream/5 group hover:bg-brand-cream/10 transition-colors duration-500 overflow-hidden">
+                    {/* Campus photo strip */}
+                    <div className="relative h-36 sm:h-44 overflow-hidden">
+                      <img
+                        src="/images/arab academy for science and technology.jpg"
+                        alt="Arab Academy for Science & Technology campus"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 brightness-50"
+                      />
+                      {/* Institution logo */}
+                      <img
+                        src="/images/arab academy logo.jpg"
+                        alt="Arab Academy logo"
+                        className="absolute bottom-3 right-4 h-12 w-12 object-contain rounded-full bg-white/10 p-1 backdrop-blur-sm"
+                      />
+                    </div>
+                    <div className="p-6 sm:p-8 lg:p-10">
+                      <span className="text-[10px] uppercase tracking-widest text-brand-cream/40 mb-3 md:mb-4 block">2023 – Expected 2027</span>
+                      <h4 className="text-2xl md:text-3xl font-serif mb-2">Bachelor of Computer Science</h4>
+                      <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-brand-cream/60">Arab Academy for Science & Technology</p>
+                    </div>
                   </div>
                 </ScrollReveal>
                 <ScrollReveal delay={0.2}>
-                  <div className="p-6 sm:p-8 lg:p-12 border border-brand-cream/5 bg-brand-cream/5 group hover:bg-brand-cream/10 transition-colors duration-500">
-                    <span className="text-[10px] uppercase tracking-widest text-brand-cream/40 mb-3 md:mb-4 block">GPA: 3.8</span>
-                    <h4 className="text-2xl md:text-3xl font-serif mb-2">American Diploma</h4>
-                    <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-brand-cream/60">Taymour English School</p>
+                  <div className="border border-brand-cream/5 bg-brand-cream/5 group hover:bg-brand-cream/10 transition-colors duration-500 overflow-hidden">
+                    {/* Campus photo strip */}
+                    <div className="relative h-36 sm:h-44 overflow-hidden">
+                      <img
+                        src="/images/Taymour english school.jpg"
+                        alt="Taymour English School campus"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 brightness-50"
+                      />
+                      {/* Institution logo */}
+                      <img
+                        src="/images/logtaymour english School logo.png"
+                        alt="Taymour English School logo"
+                        className="absolute bottom-3 right-4 h-12 w-12 object-contain rounded-full bg-white/10 p-1 backdrop-blur-sm"
+                      />
+                    </div>
+                    <div className="p-6 sm:p-8 lg:p-10">
+                      <span className="text-[10px] uppercase tracking-widest text-brand-cream/40 mb-3 md:mb-4 block">GPA: 3.8</span>
+                      <h4 className="text-2xl md:text-3xl font-serif mb-2">American Diploma</h4>
+                      <p className="text-xs md:text-sm font-bold uppercase tracking-widest text-brand-cream/60">Taymour English School</p>
+                    </div>
                   </div>
                 </ScrollReveal>
               </div>
